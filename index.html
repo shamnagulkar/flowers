@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>For You</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      height: 100vh;
+      font-family: 'Georgia', serif;
+      overflow: hidden;
+    }
+
+    /* Landing Page */
+    .landing {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #ffeef8 0%, #e8d5f2 100%);
+      transition: opacity 0.8s ease;
+    }
+
+    .landing.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .landing h2 {
+      font-size: 24px;
+      color: #6b4f8a;
+      margin-bottom: 30px;
+      letter-spacing: 1px;
+      font-weight: 400;
+    }
+
+    .open-btn {
+      padding: 16px 50px;
+      font-size: 18px;
+      background: linear-gradient(135deg, #b185db 0%, #8e78c4 100%);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(139, 87, 196, 0.3);
+      transition: all 0.3s ease;
+      font-family: 'Georgia', serif;
+      letter-spacing: 0.5px;
+    }
+
+    .open-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(139, 87, 196, 0.4);
+    }
+
+    /* Flower Page */
+    .flower-page {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      text-align: center;
+      color: #ffffff;
+      background-image: url("https://images.unsplash.com/photo-1563241527-3004b7be0ffd");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      padding: 60px 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 1.2s ease;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+    }
+
+    .flower-page.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .title-box {
+      background: rgba(107, 79, 138, 0.85);
+      padding: 35px 50px;
+      border-radius: 16px;
+      backdrop-filter: blur(10px);
+      animation: fadeInDown 1s ease;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h1 {
+      font-weight: 400;
+      letter-spacing: 4px;
+      font-size: 32px;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+    }
+
+    .footer-box {
+      background: rgba(107, 79, 138, 0.85);
+      padding: 25px 40px;
+      border-radius: 16px;
+      backdrop-filter: blur(10px);
+      animation: fadeInUp 1s ease 0.3s backwards;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    p {
+      font-size: 19px;
+      letter-spacing: 2px;
+      text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Floating petals animation */
+    .petal {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 50%;
+      animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Landing Page -->
+  <div class="landing" id="landing">
+    <h2>Hey Bhumika 💜</h2>
+    <button class="open-btn" onclick="openFlowers()">Open this</button>
+  </div>
+
+  <!-- Flower Page -->
+  <div class="flower-page" id="flowerPage">
+    <div class="title-box">
+      <h1>FLOWERS FOR MY SUNFLOWER 🌻</h1>
+    </div>
+
+    <div class="footer-box">
+      <p>THANK YOU FOR THE DATE BHUMIKA 💜</p>
+    </div>
+  </div>
+
+  <script>
+    function openFlowers() {
+      document.getElementById('landing').classList.add('hidden');
+      setTimeout(() => {
+        document.getElementById('flowerPage').classList.add('visible');
+        createPetals();
+      }, 800);
+    }
+
+    function createPetals() {
+      for (let i = 0; i < 15; i++) {
+        setTimeout(() => {
+          const petal = document.createElement('div');
+          petal.classList.add('petal');
+          petal.style.left = Math.random() * 100 + '%';
+          petal.style.animationDuration = (Math.random() * 3 + 4) + 's';
+          petal.style.animationDelay = Math.random() * 2 + 's';
+          document.getElementById('flowerPage').appendChild(petal);
+        }, i * 200);
+      }
+    }
+  </script>
+
+</body>
+</html>
